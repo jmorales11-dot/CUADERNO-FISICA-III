@@ -1,0 +1,17 @@
+{
+  "name": "Cuaderno Interactivo Virtual: Física 3 - Movimiento Oscilatorio y MAS",
+  "short_name": "Física 3: MAS",
+  "description": "Cuaderno Interactivo Virtual SPA / PWA con simulaciones físicas, plano cartesiano estilo GeoGebra y ejercicios resueltos paso a paso.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#12101a",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "imagenes/Portada.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}

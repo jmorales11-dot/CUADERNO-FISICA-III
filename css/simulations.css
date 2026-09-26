@@ -1,0 +1,236 @@
+/* ==========================================================================
+   ESTILOS DE LAS SIMULACIONES FÍSICAS INTERACTIVAS Y LABORATORIO VIRTUAL
+   Sistema masa-resorte, péndulo simple, fasor giratorio y barras de energía
+   ========================================================================== */
+
+.sim-lab-container {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.sim-lab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.25rem;
+  background: linear-gradient(135deg, var(--lilac-100) 0%, #fff 100%);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.sim-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--lilac-900);
+}
+
+.sim-viewports-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #fdfdfd;
+}
+
+@media (max-width: 820px) {
+  .sim-viewports-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lienzo de Simulación Mecánica */
+.sim-mechanical-box {
+  position: relative;
+  height: 350px;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f9f8fc 100%);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.sim-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Panel Lateral de Energía y Fasores */
+.sim-analytics-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-subpanel {
+  background: #fff;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.subpanel-title {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--lilac-900);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Barras de Energía en Tiempo Real */
+.energy-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.energy-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+
+.energy-name {
+  width: 80px;
+  font-weight: 600;
+}
+
+.energy-track {
+  flex: 1;
+  height: 14px;
+  background: #f1f5f9;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+}
+
+.energy-fill {
+  height: 100%;
+  border-radius: 7px;
+  transition: width 0.05s linear;
+}
+
+.fill-kinetic {
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.fill-potential {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.fill-total {
+  background: linear-gradient(90deg, #8b5cf6, #6d28d9);
+}
+
+.energy-val {
+  width: 55px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* Indicadores Telemétricos en Vivo */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.telemetry-cell {
+  background: var(--lilac-50);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--lilac-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+}
+
+.telemetry-val {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--lilac-800);
+}
+
+/* Controles de Reproducción y Parámetros */
+.sim-controls-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  background: var(--lilac-100);
+  border-top: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.sim-playback-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-playback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: var(--lilac-800);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-playback:hover {
+  background: var(--lilac-600);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.btn-playback.primary {
+  background: var(--lilac-600);
+  color: #fff;
+  border-color: var(--gold-400);
+  width: 44px;
+  height: 44px;
+}
+
+.btn-playback.primary:hover {
+  background: var(--lilac-700);
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.speed-selector {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--lilac-300);
+  background: #fff;
+  color: var(--lilac-900);
+  cursor: pointer;
+}
+
+.sim-sliders-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}

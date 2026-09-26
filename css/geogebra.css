@@ -1,0 +1,339 @@
+/* ==========================================================================
+   ESTILOS DEL PLANO CARTESIANO INTERACTIVO ESTILO GEOGEBRA
+   Cuadrícula milimetrada, panel de herramientas flotante y paleta de estilos
+   ========================================================================== */
+
+.geogebra-widget {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 24px rgba(44, 26, 77, 0.12);
+  overflow: hidden;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado del Widget GeoGebra */
+.geogebra-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(to right, var(--lilac-100), #ffffff);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.geogebra-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--lilac-900);
+}
+
+.geogebra-title svg {
+  color: var(--lilac-600);
+}
+
+.geogebra-curves-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.legend-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Área del Lienzo Canvas */
+.geogebra-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #fdfdfd;
+  cursor: crosshair;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.geogebra-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Barra de Herramientas Flotante Estilo GeoGebra */
+.geogebra-toolbar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.geo-tool-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.geo-tool-btn:hover {
+  background: var(--lilac-100);
+  color: var(--lilac-700);
+  border-color: var(--lilac-300);
+  transform: scale(1.05);
+}
+
+.geo-tool-btn.active {
+  background: var(--lilac-600);
+  color: #fff;
+  border-color: var(--gold-400);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+}
+
+.geo-tool-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Tooltip nativo personalizado */
+.geo-tool-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(26, 18, 43, 0.92);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.geo-tool-btn:hover::after {
+  opacity: 1;
+}
+
+/* Paleta de Estilos Gráficos (Modal / Dropdown) */
+.geogebra-style-panel {
+  position: absolute;
+  top: 12px;
+  right: 64px;
+  z-index: 20;
+  width: 240px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--gold-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: none;
+  animation: fadeInDown 0.2s ease;
+}
+
+.geogebra-style-panel.open {
+  display: block;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.style-panel-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: var(--lilac-900);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--lilac-200);
+}
+
+.style-row {
+  margin-bottom: 0.75rem;
+}
+
+.style-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.color-swatches {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.swatch-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.swatch-btn:hover {
+  transform: scale(1.2);
+}
+
+.swatch-btn.selected {
+  border-color: #2b1f47;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+.stroke-width-selector, .stroke-style-selector {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.stroke-opt-btn {
+  flex: 1;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.75rem;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.stroke-opt-btn.active {
+  background: var(--lilac-100);
+  border-color: var(--lilac-600);
+  color: var(--lilac-700);
+  font-weight: 700;
+}
+
+/* Tooltip de Inspección de Coordenadas Flotante */
+.geo-coord-badge {
+  position: absolute;
+  pointer-events: none;
+  z-index: 12;
+  background: rgba(26, 18, 43, 0.9);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gold-300);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  display: none;
+  transform: translate(12px, -50%);
+  white-space: nowrap;
+}
+
+/* Panel Inferior de Parámetros Cinemáticos (Sliders) */
+.geogebra-controls-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--lilac-50);
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+.control-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.control-label-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.control-val-tag {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--lilac-700);
+  background: #fff;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid var(--lilac-300);
+}
+
+.slider-custom {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e2e8f0;
+  outline: none;
+}
+
+.slider-custom::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--lilac-600);
+  border: 2px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
+  transition: transform 0.15s;
+}
+
+.slider-custom::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: var(--gold-500);
+}

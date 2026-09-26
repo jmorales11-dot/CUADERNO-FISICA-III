@@ -1,0 +1,568 @@
+/* ==========================================================================
+   ESTILOS GENERALES DEL CUADERNO VIRTUAL INTERACTIVO
+   Efecto libro editorial, superposición en plantilla oficial y jerarquía
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background: var(--bg-app);
+  background: radial-gradient(circle at 50% 20%, #2a2044 0%, #151024 60%, #0d0918 100%);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Contenedor Principal de la Aplicación */
+#app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Barra Superior de Estado / Encabezado */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background: rgba(18, 16, 26, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  color: #fff;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--lilac-600), var(--gold-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.brand-icon svg {
+  color: #fff;
+  width: 18px;
+  height: 18px;
+}
+
+.brand-text h1 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.brand-text span {
+  font-size: 0.75rem;
+  color: var(--gold-300);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #f1edfa;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-header:hover {
+  background: rgba(124, 58, 237, 0.3);
+  border-color: var(--gold-400);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Lienzo de Lectura / Espacio de Escritorio */
+.workspace {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem 1rem 7rem 1rem;
+  perspective: 1500px;
+}
+
+/* Marco del Cuaderno / Libro */
+.notebook-book {
+  position: relative;
+  width: 100%;
+  max-width: var(--page-width);
+  min-height: var(--page-min-height);
+  background: var(--bg-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-book);
+  transition: transform var(--transition-smooth);
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+/* Cada Página del Cuaderno */
+.notebook-page {
+  display: none;
+  position: relative;
+  width: 100%;
+  min-height: var(--page-min-height);
+  padding: 4.5rem 4rem 5.5rem 4rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.notebook-page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Portada Especial (Página 1) */
+.page-cover {
+  padding: 0 !important;
+  background: #fbf9f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cover-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: var(--page-min-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.cover-interactive-overlay {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to top, rgba(23, 16, 38, 0.85) 0%, rgba(23, 16, 38, 0.4) 60%, transparent 100%);
+}
+
+.btn-open-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: #fff;
+  background: linear-gradient(135deg, var(--lilac-700), var(--lilac-500));
+  border: 2px solid var(--gold-300);
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 25px rgba(109, 40, 217, 0.4), 0 0 20px var(--gold-glow);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-open-book:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(109, 40, 217, 0.6), 0 0 30px var(--gold-glow);
+}
+
+/* Páginas de Contenido con Fondo de Plantilla */
+.page-content-template {
+  background-image: url('../imagenes/Plantilla_contenido.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+/* Capa de contenido para legibilidad óptima sobre la textura */
+.page-inner-content {
+  position: relative;
+  z-index: 2;
+  /* Espaciado de protección para no tapar los ornamentos de la plantilla */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Encabezado interno de página */
+.page-header-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1.5px solid rgba(212, 175, 55, 0.35);
+}
+
+.page-category-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--lilac-700);
+  background: var(--lilac-100);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--lilac-300);
+}
+
+.page-number-badge {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold-700);
+  background: var(--gold-50);
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gold-300);
+}
+
+/* Tipografía de Contenidos */
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--text-title);
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.75rem;
+  font-weight: 400;
+}
+
+/* Párrafos y Citas */
+p.content-p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  text-align: justify;
+}
+
+/* Cajas de Alerta Editorial */
+.editorial-callout {
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.callout-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: var(--lilac-800);
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Numeración Secuencial de Figuras, Tablas y Ecuaciones */
+.figure-caption {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.6rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.figure-caption strong {
+  color: var(--lilac-800);
+  font-style: normal;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.styled-table th {
+  background: var(--lilac-100);
+  color: var(--lilac-900);
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  border-bottom: 2px solid var(--lilac-300);
+}
+
+.styled-table td {
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid var(--lilac-50);
+  color: var(--text-primary);
+}
+
+.styled-table tr:hover td {
+  background: var(--lilac-50);
+}
+
+/* Ecuaciones Numeradas Secuencialmente */
+.math-equation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  margin: 1rem 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: var(--shadow-sm);
+}
+
+.math-equation-content {
+  flex: 1;
+  text-align: center;
+  overflow-x: auto;
+  font-size: 1.15rem;
+}
+
+.math-equation-num {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--lilac-800);
+  font-size: 0.95rem;
+  margin-left: 1rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--lilac-100);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+/* Barra de Navegación Inferior Flotante */
+.bottom-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background: rgba(18, 14, 28, 0.92);
+  backdrop-filter: blur(16px);
+  border-top: 1.5px solid rgba(212, 175, 55, 0.4);
+  padding: 0.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.nav-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.nav-group-left, .nav-group-center, .nav-group-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #fff;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-nav:hover:not(:disabled) {
+  background: var(--lilac-600);
+  border-color: var(--gold-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.btn-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-nav-primary {
+  background: linear-gradient(135deg, var(--lilac-600), var(--lilac-700));
+  border: 1px solid var(--gold-400);
+}
+
+.page-indicator-pill {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold-300);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.45rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  min-width: 140px;
+  text-align: center;
+}
+
+/* Selector Rápido de Miniaturas / Drawer */
+.page-quick-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  overflow-x: auto;
+  max-width: 500px;
+  padding: 0.2rem 0.5rem;
+}
+
+.page-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.page-dot:hover {
+  background: var(--lilac-500);
+  color: #fff;
+}
+
+.page-dot.active {
+  background: var(--gold-500);
+  color: #1a102b;
+  border-color: #fff;
+  font-weight: 800;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* Pie de Página Obligatorio */
+.notebook-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gold-200);
+  letter-spacing: 0.5px;
+  padding-top: 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notebook-footer strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+  .notebook-page {
+    padding: 3rem 1.5rem 5rem 1.5rem;
+  }
+  .page-title {
+    font-size: 1.6rem;
+  }
+  .page-quick-selector {
+    display: none;
+  }
+  .top-header {
+    padding: 0.5rem 1rem;
+  }
+}

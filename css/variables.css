@@ -1,0 +1,97 @@
+/* ==========================================================================
+   VARIABLES DE DISEÑO Y SISTEMA DE TOKENS - FÍSICA 3: MAS
+   Inspirado en la estética editorial de portada y plantilla: Lilas, Oro, Crema
+   ========================================================================== */
+
+:root {
+  /* Fondo general y texturas */
+  --bg-app: #12101a;
+  --bg-desk: #221c33;
+  --bg-paper: #fcfbfa;
+  --bg-paper-trans: rgba(253, 252, 250, 0.94);
+  --bg-card: #ffffff;
+  --bg-card-glass: rgba(255, 255, 255, 0.82);
+
+  /* Paleta Lilas / Violetas */
+  --lilac-50: #f7f5fe;
+  --lilac-100: #ede9fe;
+  --lilac-200: #ddd6fe;
+  --lilac-300: #c4b5fd;
+  --lilac-400: #a78bfa;
+  --lilac-500: #8b5cf6;
+  --lilac-600: #7c3aed;
+  --lilac-700: #6d28d9;
+  --lilac-800: #5b21b6;
+  --lilac-900: #4c1d95;
+  --lilac-dark: #2c1a4d;
+
+  /* Paleta Dorados / Oro */
+  --gold-50: #fefce8;
+  --gold-100: #fef9c3;
+  --gold-200: #fef08a;
+  --gold-300: #fde047;
+  --gold-400: #eab308;
+  --gold-500: #d4af37;
+  --gold-600: #ca8a04;
+  --gold-700: #a16207;
+  --gold-border: #d4af37;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+
+  /* Colores Semánticos del Protocolo de Resolución */
+  /* 1) DATOS -> AZUL */
+  --color-data: #1d4ed8;
+  --bg-data: #eff6ff;
+  --border-data: #60a5fa;
+  --glow-data: rgba(37, 99, 235, 0.2);
+
+  /* 2) INCÓGNITAS -> ROJO */
+  --color-unknown: #dc2626;
+  --bg-unknown: #fef2f2;
+  --border-unknown: #f87171;
+  --glow-unknown: rgba(220, 38, 38, 0.2);
+
+  /* 3) DESPEJES Y RESULTADOS RESUELTOS -> NARANJA */
+  --color-solved: #ea580c;
+  --bg-solved: #fff7ed;
+  --border-solved: #fb923c;
+  --glow-solved: rgba(234, 88, 12, 0.25);
+
+  /* Colores de Cinemática y Gráficas */
+  --color-pos: #7c3aed;     /* Elongación x(t) - Violeta */
+  --color-vel: #059669;     /* Velocidad v(t) - Verde esmeralda */
+  --color-acc: #e11d48;     /* Aceleración a(t) - Carmín */
+  --color-energy-k: #2563eb;/* Energía Cinética - Azul */
+  --color-energy-p: #d97706;/* Energía Potencial - Ámbar */
+  --color-energy-m: #7c3aed;/* Energía Mecánica - Violeta */
+
+  /* Textos y Jerarquía */
+  --text-primary: #231b38;
+  --text-secondary: #52476b;
+  --text-muted: #7c7295;
+  --text-light: #ffffff;
+  --text-gold: #b45309;
+
+  /* Tipografías */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', 'Georgia', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Sombras y Elevaciones */
+  --shadow-sm: 0 2px 6px rgba(44, 26, 77, 0.08);
+  --shadow-md: 0 6px 18px rgba(44, 26, 77, 0.12);
+  --shadow-lg: 0 16px 36px rgba(44, 26, 77, 0.18);
+  --shadow-book: 0 25px 60px -15px rgba(10, 5, 25, 0.65), 0 0 40px rgba(124, 58, 237, 0.15);
+
+  /* Transiciones y Bordes */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --transition-fast: 150ms ease;
+  --transition-normal: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Proporciones de página (Basadas en 1103 x 1426, aspect ~ 0.7735) */
+  --page-width: 960px;
+  --page-min-height: 1240px;
+}
